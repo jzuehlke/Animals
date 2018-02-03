@@ -32,21 +32,18 @@ public class AnimalIO
             System.out.println("Do you want to enter a (C)at or (D)og or (E)xit? ");
             ans = keyboard.nextLine();
 
-            if ((ans != null) && (ans.toUpperCase().charAt(0) == 'C'))
+            //verify the input type is a character
+            InputTypeVerifier ivc = new InputTypeVerifier(ans);
+
+            switch (ivc.validInputType())
             {
-                pet = createCat();
-            }
-            else if (ans.toUpperCase().charAt(0) == 'D')
-            {
-                pet =  createDog();
-            }
-            else if (ans.toUpperCase().charAt(0) == 'E')
-            {
-                throw new Exception("Out of input");
-            }
-            else
-            {
-                System.out.println("Invalid Animal Type.");
+                case 'C': pet = createCat();
+                    break;
+                case 'D': pet = createDog();
+                    break;
+                case 'E': throw new Exception("Out of input");
+                default: System.out.println("Invalid Animal Type.");
+                    break;
             }
         }
         while((ans != null) && (ans.toUpperCase().charAt(0) != 'C') && (ans.toUpperCase().charAt(0) != 'D'));
